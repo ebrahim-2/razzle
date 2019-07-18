@@ -9,12 +9,9 @@
     "start:prod": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
-    "apollo-cache-inmemory": "^1.6.0",
-    "apollo-client": "^2.6.0",
-    "apollo-link-http": "^1.5.14",
+    "apollo-boost": "^0.4.3",
     "express": "^4.17.1",
     "graphql": "^14.3.1",
-    "graphql-tag": "^2.10.1",
     "isomorphic-unfetch": "^3.0.0",
     "razzle": "^3.0.0",
     "react": "^16.8.6",

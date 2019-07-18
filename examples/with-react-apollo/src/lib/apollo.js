@@ -1,22 +1,15 @@
-import { ApolloClient } from "apollo-client";
-import { createHttpLink } from "apollo-link-http";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloClient, InMemoryCache, HttpLink } from "apollo-boost";
 import fetch from "isomorphic-unfetch";
 
 export function createClient() {
   const client = new ApolloClient({
     connectToDevTools: process.browser,
-    ssrMode: !process.browser,
-    ssrForceFetchDelay: 100,
-    link: createHttpLink({
-      uri: "https://metaphysics-production.artsy.net/",
-      fetch
+    ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
+    link: new HttpLink({
+      uri: "https://metaphysics-production.artsy.net/", // Server URL (must be absolute)
+      // Use fetch() polyfill on the server
+      fetch: !process.browser && fetch
     }),
-    defaultOptions: {
-      query: {
-        fetchPolicy: "cache-and-network"
-      }
-    },
     cache: process.browser
       ? new InMemoryCache().restore(window.__APOLLO_STATE__)
       : new InMemoryCache()

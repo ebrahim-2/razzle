@@ -18,8 +18,14 @@ class Home extends React.Component {
     return (
       <Query query={ARTICLES}>
         {({ data, loading }) => {
-          if(loading) return <h2>Loading ...</h2>
-          return <div>{data.articles.map(a => <li key={a.id}>{a.author.name}</li>)}</div>;
+          if (loading) return <h2>Loading ...</h2>;
+          return (
+            <div>
+              {data.articles.map(a => (
+                <li key={a.id}>{a.author.name}</li>
+              ))}
+            </div>
+          );
         }}
       </Query>
     );
